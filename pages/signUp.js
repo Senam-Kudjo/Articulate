@@ -6,51 +6,11 @@ import {
   TouchableOpacity,
   TextInput,
   ImageBackground,
-  KeyboardAvoidingView,
 } from "react-native";
-import { Feather, FontAwesome } from "@expo/vector-icons";
-
-import HomeScreen from "./home";
+import { Feather } from "@expo/vector-icons";
 import Hometab from "../bottom_tabs/bottom_tabs";
 
 export default function SignUp({ navigation }) {
-  const [data, setData] = React.useState({
-    email: "",
-    password: "",
-    check_textInputChange: false,
-    secureTextEntry: true,
-  });
-
-  const textInputChange = (val) => {
-    if (val.length != 0) {
-      setData({
-        ...data,
-        email: val,
-        check_textInputChange: true,
-      });
-    } else {
-      setData({
-        ...data,
-        email: val,
-        check_textInputChange: false,
-      });
-    }
-  };
-
-  // Handling Password Change
-
-  const handlePasswordChange = (val) => {
-    setData({
-      ...data,
-      password: val,
-    });
-  };
-  const updateSecureTextEntry = (val) => {
-    setData({
-      ...data,
-      secureTextEntry: !data.secureTextEntry,
-    });
-  };
   return (
     <ImageBackground
       source={require("../assets/bg1.jpg")}

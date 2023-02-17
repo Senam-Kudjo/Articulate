@@ -2,12 +2,10 @@ import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import OnboardingScreen from "./pages/onb";
-
 import { useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import SignIn from "./pages/signIn";
 import SignUp from "./pages/signUp";
-import HomeScreen from "./pages/home";
 import Hometab from "./bottom_tabs/bottom_tabs";
 
 const Stack = createNativeStackNavigator();
@@ -36,10 +34,9 @@ const App = () => {
             headerShown: false,
           }}
         >
-          <Stack.Screen name="onb" component={OnboardingScreen} />
+          <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} />
           <Stack.Screen name="SignIn" component={SignIn} />
           <Stack.Screen name="SignUp" component={SignUp} />
-          {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
           <Stack.Screen name="Hometab" component={Hometab} />
         </Stack.Navigator>
       </NavigationContainer>
@@ -52,10 +49,9 @@ const App = () => {
             headerShown: false,
           }}
         >
-          <Stack.Screen name="Onb" component={OnboardingScreen} />
+          <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} />
           <Stack.Screen name="SignIn" component={SignIn} />
           <Stack.Screen name="SignUp" component={SignUp} />
-          {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
           <Stack.Screen name="Hometab" component={Hometab} />
         </Stack.Navigator>
       </NavigationContainer>

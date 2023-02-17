@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   TextInput,
   ImageBackground,
-  KeyboardAvoidingView,
 } from "react-native";
 
 import SignUp from "./signUp";
@@ -15,43 +14,6 @@ import HomeScreen from "./home";
 import Hometab from "../bottom_tabs/bottom_tabs";
 
 export default function SignIn({ navigation }) {
-  const [data, setData] = React.useState({
-    email: "",
-    password: "",
-    check_textInputChange: false,
-    secureTextEntry: true,
-  });
-
-  const textInputChange = (val) => {
-    if (val.length != 0) {
-      setData({
-        ...data,
-        email: val,
-        check_textInputChange: true,
-      });
-    } else {
-      setData({
-        ...data,
-        email: val,
-        check_textInputChange: false,
-      });
-    }
-  };
-
-  // Handling Password Change
-
-  const handlePasswordChange = (val) => {
-    setData({
-      ...data,
-      password: val,
-    });
-  };
-  const updateSecureTextEntry = (val) => {
-    setData({
-      ...data,
-      secureTextEntry: !data.secureTextEntry,
-    });
-  };
   return (
     <ImageBackground
       source={require("../assets/bg.jpg")}
