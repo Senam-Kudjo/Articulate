@@ -9,6 +9,7 @@ import {
 import Swiper from "react-native-swiper";
 import LottieView from "lottie-react-native";
 import SignIn from "./signIn";
+import * as Animatable from "react-native-animatable";
 
 export default function OnboardingScreen({ navigation }) {
   return (
@@ -29,9 +30,10 @@ export default function OnboardingScreen({ navigation }) {
               justifyContent: "center",
               alignItems: "center",
               backgroundColor: "black",
-              height: "30%",
+              height: 250,
+              width: 250,
               opacity: 0.75,
-              borderRadius: 99,
+              borderRadius: 360,
               top: 100,
             }}
           >
@@ -121,16 +123,14 @@ export default function OnboardingScreen({ navigation }) {
           source={require("../assets/bg3.jpg")}
           style={{ height: "100%", width: "100%", position: "absolute" }}
         />
-        <View style={{ marginTop: "150%", marginLeft: "50%" }}>
-          <TouchableOpacity
-            style={styles.letsGo}
-            onPress={() => {
-              navigation.navigate(SignIn);
-            }}
-          >
-            <Text style={{ fontWeight: "bold" }}>Let's Go</Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          style={styles.letsGo}
+          onPress={() => {
+            navigation.navigate(SignIn);
+          }}
+        >
+          <Text style={{ fontWeight: "bold" }}>Let's Go</Text>
+        </TouchableOpacity>
       </View>
       {/* END OF SLIDE 4 */}
     </Swiper>
