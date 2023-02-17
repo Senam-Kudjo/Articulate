@@ -11,6 +11,27 @@ import { Feather } from "@expo/vector-icons";
 import Hometab from "../bottom_tabs/bottom_tabs";
 
 export default function SignUp({ navigation }) {
+  // Handling Email change
+  const [data, setData] = React.useState({
+    email: "",
+    password: "",
+    check_textInputChange: false,
+    secureTextEntry: true,
+  });
+  // Handling Password Change
+
+  const handlePasswordChange = (val) => {
+    setData({
+      ...data,
+      password: val,
+    });
+  };
+  const updateSecureTextEntry = (val) => {
+    setData({
+      ...data,
+      secureTextEntry: !data.secureTextEntry,
+    });
+  };
   return (
     <ImageBackground
       source={require("../assets/bg1.jpg")}
@@ -97,14 +118,13 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   inputText: {
-    fontWeight: "bold",
-    width: 200,
+    width: 250,
   },
   signUp: {
     backgroundColor: "yellow",
     height: 45,
-    width: "40%",
-    borderRadius: 30,
+    width: "70%",
+    borderRadius: 5,
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 20,

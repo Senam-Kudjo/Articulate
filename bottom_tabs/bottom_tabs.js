@@ -21,8 +21,6 @@ export default function Hometab({ navigation }) {
           backgroundColor: "black",
           top: 0,
           height: 60,
-          // borderTopStartRadius: 18,
-          // borderTopEndRadius: 18,
           borderRadius: 0,
         },
       }}
@@ -32,7 +30,7 @@ export default function Hometab({ navigation }) {
         component={HomeScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <EntypoIcon name="home" color="white" size={23} />
+            <EntypoIcon name="home" color="white" size={25} />
           ),
         }}
       ></Tab.Screen>
@@ -41,7 +39,7 @@ export default function Hometab({ navigation }) {
         component={HomeScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="live-tv" color="white" size={23} />
+            <MaterialIcons name="live-tv" color="white" size={25} />
           ),
         }}
       ></Tab.Screen>
@@ -50,7 +48,7 @@ export default function Hometab({ navigation }) {
         component={HomeScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <MaterialComunityIcons name="newspaper" color="white" size={23} />
+            <MaterialComunityIcons name="newspaper" color="white" size={25} />
           ),
         }}
       ></Tab.Screen>
@@ -59,7 +57,7 @@ export default function Hometab({ navigation }) {
         component={HomeScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <EntypoIcon name="bookmarks" color="white" size={23} />
+            <EntypoIcon name="bookmarks" color="white" size={25} />
           ),
         }}
       ></Tab.Screen>

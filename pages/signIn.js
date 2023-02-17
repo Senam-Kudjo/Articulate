@@ -14,6 +14,27 @@ import HomeScreen from "./home";
 import Hometab from "../bottom_tabs/bottom_tabs";
 
 export default function SignIn({ navigation }) {
+  // Handling Email change
+  const [data, setData] = React.useState({
+    email: "",
+    password: "",
+    check_textInputChange: false,
+    secureTextEntry: true,
+  });
+  // Handling Password Change
+
+  const handlePasswordChange = (val) => {
+    setData({
+      ...data,
+      password: val,
+    });
+  };
+  const updateSecureTextEntry = (val) => {
+    setData({
+      ...data,
+      secureTextEntry: !data.secureTextEntry,
+    });
+  };
   return (
     <ImageBackground
       source={require("../assets/bg.jpg")}
@@ -84,7 +105,7 @@ export default function SignIn({ navigation }) {
         }}
         style={{ marginTop: -40 }}
       >
-        <Text style={{ textDecorationLine: "underline" }}>
+        <Text style={{ textDecorationLine: "underline", fontWeight: "500" }}>
           Don't Have an Account? Sign Up.
         </Text>
       </TouchableOpacity>

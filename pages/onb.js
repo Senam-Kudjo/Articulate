@@ -129,7 +129,9 @@ export default function OnboardingScreen({ navigation }) {
             navigation.navigate(SignIn);
           }}
         >
-          <Text style={{ fontWeight: "bold" }}>Let's Go</Text>
+          <Text style={{ fontSize: 20, color: "white", fontWeight: "bold" }}>
+            Let's Go
+          </Text>
         </TouchableOpacity>
       </View>
       {/* END OF SLIDE 4 */}
@@ -167,10 +169,13 @@ const styles = StyleSheet.create({
   },
   letsGo: {
     borderRadius: 15,
-    height: 40,
-    width: 100,
-    backgroundColor: "white",
+    height: 45,
+    width: 200,
+    borderWidth: 1,
+    borderColor: "white",
+    backgroundColor: "black",
     justifyContent: "center",
     alignItems: "center",
+    marginTop: 100,
   },
 });
