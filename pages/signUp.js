@@ -39,99 +39,94 @@ export default function SignUp({ navigation }) {
         justifyContent: "center",
         alignItems: "center",
         flex: 1,
-        height: "100%",
-        width: "100%",
       }}
-      resizeMode="repeat"
     >
-      <View
-        style={{
-          height: "60%",
-          width: "90%",
-          borderRadius: 20,
-          backgroundColor: "white",
-          opacity: 0.9,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Text
-          style={{
-            fontSize: 20,
-            paddingBottom: 20,
-            color: "black",
-            fontWeight: "bold",
-          }}
-        >
-          Create An Account
+      <View style={styles.boxKun}>
+        <Text style={{ fontSize: 19, fontWeight: "bold" }}>
+          Create Your Account
         </Text>
-        {/* <KeyboardAvoidingView behavior="padding"> */}
-        <TouchableOpacity style={styles.input}>
+
+        <View style={styles.inputBox}>
           <TextInput
             placeholder="Email or Username"
-            placeholderTextColor={"grey"}
-            style={styles.inputText}
-          ></TextInput>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.input}>
+            placeholderTextColor="grey"
+            style={{ fontSize: 14 }}
+          />
+        </View>
+        <View style={styles.inputBox}>
           <TextInput
             placeholder="Password"
+            placeholderTextColor="grey"
+            maxLength={25}
+            style={{ fontSize: 14, width: "85%", paddingTop: 5 }}
             secureTextEntry={data.secureTextEntry ? true : false}
-            style={styles.inputText}
-            autoCapitalize={"none"}
             onChangeText={(val) => handlePasswordChange(val)}
           />
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={updateSecureTextEntry} style={styles.eye}>
-          {data.secureTextEntry ? (
-            <Feather name="eye-off" color={"grey"} size={25} />
-          ) : (
-            <Feather name="eye" color={"grey"} size={25} />
-          )}
-        </TouchableOpacity>
+          <TouchableOpacity onPress={updateSecureTextEntry} style={styles.eye}>
+            {data.secureTextEntry ? (
+              <Feather name="eye-off" color={"grey"} size={25} />
+            ) : (
+              <Feather name="eye" color={"grey"} size={25} />
+            )}
+          </TouchableOpacity>
+        </View>
+        <View style={styles.inputBox}>
+          <TextInput
+            placeholder="Confirm Password"
+            placeholderTextColor="grey"
+            maxLength={25}
+            style={{ fontSize: 14, width: "85%", paddingTop: 5 }}
+            secureTextEntry={data.secureTextEntry ? true : false}
+            onChangeText={(val) => handlePasswordChange(val)}
+          />
+          <TouchableOpacity onPress={updateSecureTextEntry} style={styles.eye}>
+            {data.secureTextEntry ? (
+              <Feather name="eye-off" color={"grey"} size={25} />
+            ) : (
+              <Feather name="eye" color={"grey"} size={25} />
+            )}
+          </TouchableOpacity>
+        </View>
         <TouchableOpacity
-          style={styles.signUp}
-          onPress={() => {
-            navigation.navigate(Hometab);
-          }}
+          style={styles.signInButton}
+          onPress={() => navigation.navigate("Hometab")}
         >
-          <Text style={{ fontWeight: "bold" }}>Sign Up</Text>
+          <Text style={{ fontWeight: "600" }}>Sign In</Text>
         </TouchableOpacity>
-        <Text> Forgot Password?</Text>
-        {/* </KeyboardAvoidingView> */}
       </View>
     </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  boxKun: {},
-  input: {
-    backgroundColor: "#D9DDDB",
-    height: 45,
+  boxKun: {
+    height: 400,
+    width: "90%",
+    borderRadius: 20,
+    backgroundColor: "white",
+    opacity: 0.97,
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+  },
+  inputBox: {
+    height: 50,
+    backgroundColor: "white",
+    justifyContent: "flex-start",
+    paddingLeft: 10,
+    alignItems: "center",
     width: "80%",
+    marginTop: 25,
     borderRadius: 5,
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 20,
+    flexDirection: "row",
   },
-  inputText: {
-    width: 250,
-  },
-  signUp: {
-    backgroundColor: "yellow",
+  signInButton: {
+    borderRadius: 10,
+    marginTop: 35,
     height: 45,
-    width: "70%",
-    borderRadius: 5,
+    width: "55%",
+    backgroundColor: "yellow",
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 20,
-    marginTop: -10,
-  },
-  eye: {
-    bottom: 55,
-    left: 100,
   },
 });
