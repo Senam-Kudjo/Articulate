@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
   letsGo: {
     borderRadius: 15,
     height: 45,
-    width: 200,
+    width: 150,
     borderWidth: 1,
     borderColor: "white",
     backgroundColor: "red",
@@ -178,6 +178,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "flex-end",
     top: 200,
-    right: 10,
+    right: 20,
   },
 });
