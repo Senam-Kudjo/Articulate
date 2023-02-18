@@ -173,9 +173,11 @@ const styles = StyleSheet.create({
     width: 200,
     borderWidth: 1,
     borderColor: "white",
-    backgroundColor: "black",
+    backgroundColor: "red",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 100,
+    alignSelf: "flex-end",
+    top: 200,
+    right: 10,
   },
 });
