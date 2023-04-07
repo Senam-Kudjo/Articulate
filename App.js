@@ -7,6 +7,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import SignIn from "./pages/signIn";
 import SignUp from "./pages/signUp";
 import Hometab from "./bottom_tabs/bottom_tabs";
+import HomeScreen from "./pages/home";
 
 const Stack = createNativeStackNavigator();
 
@@ -53,6 +54,7 @@ const App = () => {
           <Stack.Screen name="SignIn" component={SignIn} />
           <Stack.Screen name="SignUp" component={SignUp} />
           <Stack.Screen name="Hometab" component={Hometab} />
+          {/* <Stack.Screen name="HomeScreen" component={HomeScreen} /> */}
         </Stack.Navigator>
       </NavigationContainer>
     );

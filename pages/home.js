@@ -1,72 +1,211 @@
-import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
 import {
   SafeAreaView,
-  ScrollView,
   StyleSheet,
+  View,
   Text,
   TextInput,
+  Image,
   TouchableOpacity,
-  View,
+  ScrollView,
 } from "react-native";
-import { Ionicons, Entypo } from "@expo/vector-icons";
-import { ImageBackground } from "react-native";
+import { Ionicons, Entypo, AntDesign, EvilIcons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
+import { Octicons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
+import Hometab from "../bottom_tabs/bottom_tabs";
 
+const { width, height } = Dimensions.get("window");
 export default function HomeScreen({ navigation }) {
   return (
-    // <SafeAreaView style={styles.mainScreen}>
-    <View style={styles.homeScreen}>
-      <View style={styles.firstLane}>
-        <Entypo name="bell" size={24} color="black" />
-      </View>
-      <View>
-        <TouchableOpacity style={styles.searchBar}>
-          <TextInput placeholder="Search ..." style={styles.searchBarText} />
-          <Ionicons
-            name="ios-search-outline"
-            size={24}
-            color="grey"
-            style={{ paddingRight: 10 }}
+    <SafeAreaView style={styles.mainScreen}>
+      <View style={styles.barView}>
+        <Octicons name="three-bars" size={22} color="black" />
+        <View style={styles.cartLane}>
+          <Feather name="shopping-bag" size={22} color="black" />
+          <Octicons
+            name="person"
+            size={22}
+            color="black"
+            style={{ marginLeft: 25 }}
           />
-        </TouchableOpacity>
+        </View>
       </View>
-
-      <View style={{ height: 530 }}></View>
-    </View>
-    // </SafeAreaView>
+      <ScrollView>
+        <View style={{ paddingTop: 25, paddingLeft: 20 }}>
+          <Text style={{ fontSize: 23, fontWeight: "600" }}>Discover Art</Text>
+        </View>
+        <View style={styles.searchBar}>
+          <EvilIcons
+            name="search"
+            size={23}
+            color="black"
+            style={{ paddingBottom: 4 }}
+          />
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Search Items"
+            placeholderTextColor="grey"
+          />
+        </View>
+        <View style={styles.tabView}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <TouchableOpacity style={styles.mainTab}>
+              <Text style={styles.mainTabText}>Top</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.tabs}>
+              <Text style={styles.tabsText}>New</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.tabs}>
+              <Text style={styles.tabsText}>Artist</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.tabs}>
+              <Text style={styles.tabsText}>Discount</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.tabs}>
+              <Text style={styles.tabsText}>Cheapest</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.tabs}>
+              <Text style={styles.tabsText}>Unique</Text>
+            </TouchableOpacity>
+          </ScrollView>
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            flexWrap: "wrap",
+            margin: 15,
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <TouchableOpacity style={styles.example}>
+            <Image
+              source={require("../assets/bg2.jpg")}
+              style={styles.example}
+            ></Image>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.example}>
+            <Image
+              source={require("../assets/bg2.jpg")}
+              style={styles.example}
+            ></Image>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.example}>
+            <Image
+              source={require("../assets/bg2.jpg")}
+              style={styles.example}
+            ></Image>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.example}>
+            <Image
+              source={require("../assets/bg2.jpg")}
+              style={styles.example}
+            ></Image>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.example}>
+            <Image
+              source={require("../assets/bg2.jpg")}
+              style={styles.example}
+            ></Image>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.example}>
+            <Image
+              source={require("../assets/bg2.jpg")}
+              style={styles.example}
+            ></Image>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  homeScreen: {
-    height: "100%",
-    width: "100%",
+  mainScreen: {
+    backgroundColor: "white",
+    flex: 1,
+    width,
+    height,
+  },
+  barView: {
+    marginTop: 60,
+    marginLeft: 20,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    zIndex: 10,
+    height: 40,
+  },
+  cartLane: {
+    flexDirection: "row",
+    marginHorizontal: 30,
     justifyContent: "center",
     alignItems: "center",
-    // backgroundColor: "#040009",
-    backgroundColor: "white",
-    position: "absolute",
+    zIndex: 20,
   },
   searchBar: {
-    backgroundColor: "#F0F0F0",
-    width: "90%",
-    height: 40,
+    marginTop: 15,
     justifyContent: "center",
-    borderRadius: 7,
-    shadowRadius: 5,
-    shadowColor: "silver",
+    alignItems: "center",
     flexDirection: "row",
+    borderWidth: 0.3,
+    borderColor: "grey",
+    width: "85%",
+    borderRadius: 6,
+    marginLeft: 20,
+  },
+  searchInput: {
+    height: 40,
+    width: "80%",
+    backgroundColor: "white",
+    paddingLeft: 5,
+  },
+  tabView: {
+    flexDirection: "row",
+    marginTop: 35,
+    width: "100%",
+    textAlign: "center",
     alignItems: "center",
   },
-  searchBarText: {
-    paddingLeft: 10,
-    width: "90%",
-    paddingTop: 0,
+  mainTab: {
+    marginLeft: 20,
+    height: 30,
+    textAlign: "center",
+    borderRadius: 10,
+    alignSelf: "center",
+    marginRight: 10,
+    backgroundColor: "black",
+    width: 70,
   },
-  firstLane: {
-    marginBottom: 27,
-    justifyContent: "flex-end",
-    alignSelf: "flex-end",
-    paddingRight: 20,
+  mainTabText: {
+    textAlign: "center",
+    padding: 5,
+    color: "white",
+    fontWeight: "bold",
+  },
+  tabs: {
+    marginLeft: 10,
+    height: 28,
+    textAlign: "center",
+    borderRadius: 7,
+    width: 75,
+    borderWidth: 0.4,
+    borderColor: "grey",
+    marginRight: 10,
+    alignSelf: "center",
+  },
+  tabsText: {
+    textAlign: "center",
+    padding: 4,
+  },
+  example: {
+    height: 200,
+    width: 155,
+    backgroundColor: "white",
+    marginBottom: 20,
+    // borderWidth: 0.3,
+    // borderColor: "grey",
+    borderRadius: 15,
   },
 });
