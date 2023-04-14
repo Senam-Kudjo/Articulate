@@ -8,15 +8,53 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
+  FlatList,
+  Dimensions,
 } from "react-native";
-import { Ionicons, Entypo, AntDesign, EvilIcons } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
-import { Octicons } from "@expo/vector-icons";
-import { Feather } from "@expo/vector-icons";
-import Hometab from "../bottom_tabs/bottom_tabs";
+import { EvilIcons, Octicons, Feather } from "@expo/vector-icons";
+import pictures from "../components/pictures";
 
-const { width, height } = Dimensions.get("window");
+const { width } = Dimensions.get("screen");
+const cardWidth = width / 2;
 export default function HomeScreen({ navigation }) {
+  const categories = ["Top", "New", "Artist", "Discount", "Cheapest", "Unique"];
+  const [selectedCategoryIndex, setSelectedCategoryindex] = React.useState(0);
+
+  function CategoryList() {
+    return (
+      <View style={styles.categoryListContainer}>
+        {categories.map((item, index) => (
+          <TouchableOpacity
+            key={index}
+            activeOpacity={0.8}
+            onPress={() => setSelectedCategoryindex(index)}
+          >
+            <View>
+              <Text
+                style={{
+                  ...styles.categoryListtext,
+                  color: selectedCategoryIndex == index ? "white" : "grey",
+                  backgroundColor:
+                    selectedCategoryIndex == index ? "#D1AD52" : "white",
+                  borderWidth: selectedCategoryIndex == index ? 0 : 1,
+                }}
+              >
+                {item}
+              </Text>
+            </View>
+          </TouchableOpacity>
+        ))}
+      </View>
+    );
+  }
+
+  const Card = ({ picture, index }) => {
+    return (
+      <View style={{ ...styles.card }}>
+        <Image source={picture.image} style={styles.cardImage} />
+      </View>
+    );
+  };
   return (
     <SafeAreaView style={styles.mainScreen}>
       <View style={styles.barView}>
@@ -32,8 +70,10 @@ export default function HomeScreen({ navigation }) {
         </View>
       </View>
       <ScrollView>
-        <View style={{ paddingTop: 25, paddingLeft: 20 }}>
-          <Text style={{ fontSize: 23, fontWeight: "600" }}>Discover Art</Text>
+        <View style={{ marginTop: 15, marginLeft: 20, zIndex: 999 }}>
+          <Text style={{ fontSize: 23, fontWeight: "600", color: "#A38126" }}>
+            Discover Art
+          </Text>
         </View>
         <View style={styles.searchBar}>
           <EvilIcons
@@ -48,73 +88,19 @@ export default function HomeScreen({ navigation }) {
             placeholderTextColor="grey"
           />
         </View>
-        <View style={styles.tabView}>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            <TouchableOpacity style={styles.mainTab}>
-              <Text style={styles.mainTabText}>Top</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.tabs}>
-              <Text style={styles.tabsText}>New</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.tabs}>
-              <Text style={styles.tabsText}>Artist</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.tabs}>
-              <Text style={styles.tabsText}>Discount</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.tabs}>
-              <Text style={styles.tabsText}>Cheapest</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.tabs}>
-              <Text style={styles.tabsText}>Unique</Text>
-            </TouchableOpacity>
-          </ScrollView>
-        </View>
-        <View
-          style={{
-            flexDirection: "row",
-            flexWrap: "wrap",
-            margin: 15,
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <TouchableOpacity style={styles.example}>
-            <Image
-              source={require("../assets/bg2.jpg")}
-              style={styles.example}
-            ></Image>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.example}>
-            <Image
-              source={require("../assets/bg2.jpg")}
-              style={styles.example}
-            ></Image>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.example}>
-            <Image
-              source={require("../assets/bg2.jpg")}
-              style={styles.example}
-            ></Image>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.example}>
-            <Image
-              source={require("../assets/bg2.jpg")}
-              style={styles.example}
-            ></Image>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.example}>
-            <Image
-              source={require("../assets/bg2.jpg")}
-              style={styles.example}
-            ></Image>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.example}>
-            <Image
-              source={require("../assets/bg2.jpg")}
-              style={styles.example}
-            ></Image>
-          </TouchableOpacity>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <CategoryList />
+        </ScrollView>
+        <View>
+          <FlatList
+            horizontal
+            data={pictures}
+            contentContainerStyle={{ paddingVertical: 30, paddingLeft: 20 }}
+            showsHorizontalScrollIndicator={false}
+            renderItem={({ item, index }) => (
+              <Card picture={item} index={index} />
+            )}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -125,11 +111,10 @@ const styles = StyleSheet.create({
   mainScreen: {
     backgroundColor: "white",
     flex: 1,
-    width,
-    height,
+    height: "100%",
   },
   barView: {
-    marginTop: 60,
+    marginTop: 50,
     marginLeft: 20,
     flexDirection: "row",
     justifyContent: "space-between",
@@ -161,51 +146,38 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     paddingLeft: 5,
   },
-  tabView: {
+  categoryListContainer: {
     flexDirection: "row",
-    marginTop: 35,
-    width: "100%",
-    textAlign: "center",
-    alignItems: "center",
+    justifyContent: "space-between",
+    marginHorizontal: 20,
+    marginTop: 30,
   },
-  mainTab: {
-    marginLeft: 20,
-    height: 30,
-    textAlign: "center",
-    borderRadius: 10,
-    alignSelf: "center",
-    marginRight: 10,
-    backgroundColor: "black",
-    width: 70,
-  },
-  mainTabText: {
-    textAlign: "center",
-    padding: 5,
-    color: "white",
+  categoryListtext: {
     fontWeight: "bold",
-  },
-  tabs: {
-    marginLeft: 10,
-    height: 28,
-    textAlign: "center",
-    borderRadius: 7,
-    width: 75,
-    borderWidth: 0.4,
-    borderColor: "grey",
-    marginRight: 10,
+    fontSize: 15,
+    color: "grey",
+    borderWidth: 1,
+    marginRight: 20,
     alignSelf: "center",
-  },
-  tabsText: {
     textAlign: "center",
     padding: 4,
+    height: 30,
+    width: 85,
+    borderRadius: 7,
+    borderColor: "#D0D0D0",
   },
-  example: {
-    height: 200,
-    width: 155,
-    backgroundColor: "white",
-    marginBottom: 20,
-    // borderWidth: 0.3,
-    // borderColor: "grey",
+  card: {
+    height: 240,
+    width: cardWidth,
+    elevation: 15,
+    marginRight: 20,
     borderRadius: 15,
+    backgroundColor: "white",
+  },
+  cardImage: {
+    width: "100%",
+    height: 180,
+    borderTopRightRadius: 15,
+    borderTopLeftRadius: 15,
   },
 });
