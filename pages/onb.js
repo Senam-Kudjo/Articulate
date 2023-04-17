@@ -17,7 +17,7 @@ export default function OnboardingScreen({ navigation }) {
       {/* SLIDEEEEEEEEE 11111111 */}
       <View style={styles.slide1}>
         <ImageBackground
-          source={require("../assets/bg2.jpg")}
+          source={require("../assets/a1.jpg")}
           style={{
             height: "100%",
             width: "100%",
@@ -120,7 +120,7 @@ export default function OnboardingScreen({ navigation }) {
       {/* SLIDEEEEEEEEEEEE 44444444444444444 */}
       <View style={styles.slide4}>
         <Image
-          source={require("../assets/bg3.jpg")}
+          source={require("../assets/a3.jpg")}
           style={{ height: "100%", width: "100%", position: "absolute" }}
         />
         <TouchableOpacity

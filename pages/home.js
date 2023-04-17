@@ -10,8 +10,14 @@ import {
   ScrollView,
   FlatList,
   Dimensions,
+  Animated,
 } from "react-native";
-import { EvilIcons, Octicons, Feather } from "@expo/vector-icons";
+import {
+  EvilIcons,
+  Octicons,
+  Feather,
+  MaterialIcons,
+} from "@expo/vector-icons";
 import pictures from "../components/pictures";
 
 const { width } = Dimensions.get("screen");
@@ -19,6 +25,7 @@ const cardWidth = width / 2;
 export default function HomeScreen({ navigation }) {
   const categories = ["Top", "New", "Artist", "Discount", "Cheapest", "Unique"];
   const [selectedCategoryIndex, setSelectedCategoryindex] = React.useState(0);
+  const scrollX = React.useRef(new Animated.Value(0)).current;
 
   function CategoryList() {
     return (
@@ -49,9 +56,60 @@ export default function HomeScreen({ navigation }) {
   }
 
   const Card = ({ picture, index }) => {
+    const inputRange = [
+      (index - 1) * cardWidth,
+      index * cardWidth,
+      (index + 1) * cardWidth,
+    ];
+    const opacity = scrollX.interpolate({
+      inputRange,
+      outputRange: [0, 0, 0],
+    });
+    const scale = scrollX.interpolate({
+      inputRange,
+      outputRange: [0.5, 1, 0.5],
+    });
+
     return (
-      <View style={{ ...styles.card }}>
+      <View style={{ ...styles.card, transform: [{ scale }] }}>
+        <Animated.View style={{ ...styles.cardOverlay, opacity }} />
+        <View style={styles.priceTag}>
+          <Text style={{ color: "white", fontSize: 15, fontWeight: "bold" }}>
+            $15
+          </Text>
+        </View>
         <Image source={picture.image} style={styles.cardImage} />
+        <View style={styles.cardDetails}></View>
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          <View>
+            <Text
+              style={{
+                fontWeight: "bold",
+                fontSize: 14,
+                paddingLeft: 10,
+                marginTop: 5,
+                marginBottom: 2,
+              }}
+            >
+              {picture.name}
+            </Text>
+            <Text style={{ fontSize: 12, paddingLeft: 10, padding: 1 }}>
+              Artiste: {picture.artiste}
+            </Text>
+            <Text style={{ fontSize: 12, paddingLeft: 10 }}>
+              Sales: {picture.sales}
+            </Text>
+          </View>
+          <MaterialIcons
+            name="favorite-outline"
+            size={24}
+            color="red"
+            style={{
+              marginRight: 13,
+              marginTop: 2,
+            }}
+          />
+        </View>
       </View>
     );
   };
@@ -92,7 +150,26 @@ export default function HomeScreen({ navigation }) {
           <CategoryList />
         </ScrollView>
         <View>
-          <FlatList
+          <Animated.FlatList
+            onScroll={Animated.event(
+              [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+              { useNativeDriver: true }
+            )}
+            horizontal
+            data={pictures}
+            contentContainerStyle={{ paddingVertical: 30, paddingLeft: 20 }}
+            showsHorizontalScrollIndicator={false}
+            renderItem={({ item, index }) => (
+              <Card picture={item} index={index} />
+            )}
+          />
+        </View>
+        <View>
+          <Animated.FlatList
+            onScroll={Animated.event(
+              [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+              { useNativeDriver: true }
+            )}
             horizontal
             data={pictures}
             contentContainerStyle={{ paddingVertical: 30, paddingLeft: 20 }}
@@ -167,7 +244,7 @@ const styles = StyleSheet.create({
     borderColor: "#D0D0D0",
   },
   card: {
-    height: 240,
+    height: 265,
     width: cardWidth,
     elevation: 15,
     marginRight: 20,
@@ -176,8 +253,38 @@ const styles = StyleSheet.create({
   },
   cardImage: {
     width: "100%",
-    height: 180,
+    height: 190,
     borderTopRightRadius: 15,
     borderTopLeftRadius: 15,
+  },
+  priceTag: {
+    height: 30,
+    width: 40,
+    zIndex: 1,
+    position: "absolute",
+    borderTopRightRadius: 15,
+    borderBottomLeftRadius: 15,
+    right: 0,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "purple",
+    opacity: 0.6,
+  },
+  cardDetails: {
+    height: 60,
+    backgroundColor: "white",
+    borderRadius: 15,
+    position: "absolute",
+    bottom: 0,
+    padding: 20,
+    width: "100%",
+  },
+  cardOverlay: {
+    height: 265,
+    width: cardWidth,
+    backgroundColor: "white",
+    zIndex: 100,
+    position: "absolute",
+    borderRadius: 15,
   },
 });
